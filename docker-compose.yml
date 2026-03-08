@@ -1,0 +1,25 @@
+services:
+  # eps_rabbitmq:
+  #   image: rabbitmq:3-management
+  #   container_name: eps_rabbitmq
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+  #   networks:
+  #     - eps_network
+
+  api_eps_ingesta:
+    build: .
+    container_name: api_eps_ingesta
+    ports:
+      - "5000:5000"
+    environment:
+      - RABBITMQ_URL=amqp://admin:Admin123@localhost:5672
+    # depends_on:
+      # - eps_rabbitmq
+    networks:
+      - eps_network
+
+networks:
+  eps_network:
+    driver: bridge
