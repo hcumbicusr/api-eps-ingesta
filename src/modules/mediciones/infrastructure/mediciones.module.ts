@@ -12,8 +12,8 @@ import { RabbitMqRepository } from './rabbitmq.repository';
         name: 'EPS_RABBIT_SERVICE',
         transport: Transport.RMQ,
         options: {
-          urls: ['amqp://admin:Admin123@localhost:5672'],
-          queue: 'medicion.registrada',
+          urls: [process.env.RABBITMQ_URL],
+          queue: process.env.QUEUE_NAME_MEDICION_REGISTRADA,
           queueOptions: {
             durable: true,
           },

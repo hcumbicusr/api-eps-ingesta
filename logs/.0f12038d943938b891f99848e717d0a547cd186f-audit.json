@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "logs\\.0f12038d943938b891f99848e717d0a547cd186f-audit.json",
+    "files": [
+        {
+            "date": 1773020171353,
+            "name": "logs\\log_api_eps_ingesta_20260308.log",
+            "hash": "2840a0774c06fee3d16caa996774dac1cc46657ae3fb7cd644b60cd90dbdf277"
+        }
+    ],
+    "hashType": "sha256"
+}

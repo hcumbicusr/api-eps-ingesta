@@ -1,22 +1,17 @@
 services:
-  # eps_rabbitmq:
-  #   image: rabbitmq:3-management
-  #   container_name: eps_rabbitmq
-  #   ports:
-  #     - "5672:5672"
-  #     - "15672:15672"
-  #   networks:
-  #     - eps_network
-
-  api_eps_ingesta:
-    build: .
+  api-eps-ingesta:
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: api_eps_ingesta
+    env_file: .env
     ports:
-      - "5000:5000"
-    environment:
-      - RABBITMQ_URL=amqp://admin:Admin123@localhost:5672
-    # depends_on:
-      # - eps_rabbitmq
+      - "${INGESTA_PORT}:${INGESTA_PORT}"
+    depends_on:
+      - rabbitmq-eps-broker
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
     networks:
       - eps_network
 
