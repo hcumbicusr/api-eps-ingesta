@@ -7,6 +7,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { RegistrarMedicionUseCase } from '../application/registrar-medicion.usecase';
+import { RegistrarMedicionDto } from './dto/registrar-medicion.dto';
 
 @Controller('api/v1/mediciones')
 export class MedicionesController {
@@ -15,7 +16,7 @@ export class MedicionesController {
 
   @Post()
   @HttpCode(HttpStatus.ACCEPTED)
-  async create(@Body() data: any) {
+  async create(@Body() data: RegistrarMedicionDto) {
     this.logger.log(
       `Post /api/v1/mediciones recibido: ${JSON.stringify(data)}`,
     );
