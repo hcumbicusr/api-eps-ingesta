@@ -1,5 +1,6 @@
 import { Injectable, Inject, Logger } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { lastValueFrom } from 'rxjs';
 import { IMedicionRepository } from '../domain/medicion.repository';
 
 @Injectable()
@@ -14,6 +15,6 @@ export class RabbitMqRepository implements IMedicionRepository {
     this.logger.log(
       `RabbitMqRepository data enviada a rabbitmq: ${JSON.stringify(data)}`,
     );
-    this.client.emit('medicion.registrada', data);
+    await lastValueFrom(this.client.emit('medicion.registrada', data));
   }
 }

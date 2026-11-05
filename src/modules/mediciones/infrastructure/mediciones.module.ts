@@ -4,6 +4,8 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { MedicionesController } from './mediciones.controller';
 import { RegistrarMedicionUseCase } from '../application/registrar-medicion.usecase';
 import { RabbitMqRepository } from './rabbitmq.repository';
+import { SimuladorMedicionesController } from './simulador-mediciones.controller';
+import { SimuladorMedicionesService } from '../application/simulador-mediciones.service';
 
 @Module({
   imports: [
@@ -21,9 +23,10 @@ import { RabbitMqRepository } from './rabbitmq.repository';
       },
     ]),
   ],
-  controllers: [MedicionesController],
+  controllers: [MedicionesController, SimuladorMedicionesController],
   providers: [
     RegistrarMedicionUseCase,
+    SimuladorMedicionesService,
     {
       provide: 'IMedicionRepository',
       useClass: RabbitMqRepository,
