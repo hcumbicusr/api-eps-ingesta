@@ -2,6 +2,7 @@ import {
   Controller,
   Post,
   Body,
+  Headers,
   HttpCode,
   HttpStatus,
   Logger,
@@ -16,11 +17,11 @@ export class MedicionesController {
 
   @Post()
   @HttpCode(HttpStatus.ACCEPTED)
-  async create(@Body() data: RegistrarMedicionDto) {
+  async create(@Body() data: RegistrarMedicionDto, @Headers('x-sidi-simulacion-id') loteId?: string) {
     this.logger.log(
       `Post /api/v1/mediciones recibido: ${JSON.stringify(data)}`,
     );
-    await this.useCase.execute(data);
+    await this.useCase.execute(data, loteId);
     return {
       status: 'Aceptado',
       message: 'Lectura encolada para evaluación IA vía NestJS Hexagonal.',

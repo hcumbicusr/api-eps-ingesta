@@ -81,7 +81,7 @@ export class SimuladorMedicionesService {
       try {
         const response = await fetch(url, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'x-sidi-simulacion-id': trabajo.id },
           body: JSON.stringify(generarMedicionSimulada(i)),
           signal: AbortSignal.timeout(8000),
         });
